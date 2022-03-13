@@ -24,7 +24,7 @@ function que(project) {
       },
     ]);
 
-    return c.on("drain", price);
+    return c.on("drain", () => price);
 
 }
 
