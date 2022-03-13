@@ -34,6 +34,7 @@ function que(project) {
 function clearSet(){
   c = new Crawler.queue()
   prices.clear()
+  console.log(prices)
 }
 function getLink(name) {
   return "https://api.opensea.io/collection/" + name + "/stats";
