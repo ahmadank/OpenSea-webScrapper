@@ -11,6 +11,7 @@ const c = new Crawler({
     }catch{
       price = "No price"
     }
+    console.log(price)
     done();
   },
 });
@@ -23,10 +24,9 @@ function que(project) {
         jQuery: false,
       },
     ]);
-
-    return c.on("drain", () => price);
-
 }
+
+c.on("drain", () => console.log("LOL"));
 
 function getLink(name) {
   return "https://api.opensea.io/collection/" + name + "/stats";
