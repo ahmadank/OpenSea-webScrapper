@@ -8,7 +8,7 @@ const c = new Crawler({
     
     if (error) throw error;
     try{
-    console.log(res.path)
+    console.log(res)
     prices.add([JSON.parse(res.body).stats.floor_price])
     }catch{
       prices.add(["Error"])
