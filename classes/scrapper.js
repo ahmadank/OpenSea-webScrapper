@@ -1,14 +1,14 @@
 const Crawler = require("crawler");
 // var interval = setInterval(que(),1800000)
-var price ="";
+let prices = new Set();
+
 const c = new Crawler({
   maxConnections: 10,
   callback: async (error, res, done) => {
     
     if (error) throw error;
     try{
-    console.log(res)
-    price = JSON.parse(res.body).stats.floor_price;
+    prices.add([res.uri,JSON.parse(res.body).stats.floor_price])
     }catch{
       price = "No price"
     }
@@ -26,7 +26,7 @@ function que(project) {
       },
     ]);
     return new Promise(resolve => {
-      c.on("drain", () => resolve(price));
+      c.on("drain", () => resolve(prices));
     });
 }
 
