@@ -1,12 +1,13 @@
 const Crawler = require("crawler");
 // var interval = setInterval(que(),1800000)
-var price ="NOT WORKING";
+var price ="";
 const c = new Crawler({
   maxConnections: 10,
   callback: async (error, res, done) => {
     
     if (error) throw error;
     try{
+    console.log(res)
     price = JSON.parse(res.body).stats.floor_price;
     }catch{
       price = "No price"
