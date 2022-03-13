@@ -1,29 +1,28 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const session = require('express-session')
-const MongoDBStore = require('connect-mongodb-session')(session);
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 const path = require("path");
 
-const crawlerRouter = require("./routes/crawler");
-const dataBase = require("./routes/dataBase");
+const dataBase = require("./classes/dataBase");
 const PORT = process.env.PORT || 3000;
 
-
 const app = express();
-const uri = process.env.MONGOLAB_URI
-
+const uri = process.env.MONGOLAB_URI;
 
 const store = new MongoDBStore({
-	uri: uri,
-	collection: 'sessions'
+  uri: uri,
+  collection: "sessions",
 });
 
-app.use(session({
-	secret: 'some secret here',
-	store: store,
-  resave: true,
-  saveUninitialized: false
-}))
+app.use(
+  session({
+    secret: process.env.SESSION_KEY,
+    store: store,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(
   express.urlencoded({
@@ -31,8 +30,9 @@ app.use(
   })
 );
 
-app.get('/', function (req, res) {
-  res.render('pages/index')
+app.get("/", function (req, res) {
+  dataBase.queProject(req.session)
+  res.render("pages/index");
 });
 
 app.use(express.static("public"));
@@ -43,19 +43,22 @@ app.set("view engine", "pug");
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-async function main(){;
+async function main() {
   try {
-    mongoose.connect( uri, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
-    console.log("connected"));    
-    }catch (error) { 
-    console.log("could not connect");    
-  }  
+    mongoose.connect(
+      uri,
+      { useNewUrlParser: true, useUnifiedTopology: true },
+      () => console.log("connected")
+    );
+  } catch (error) {
+    console.log("could not connect");
+  }
 
-const db = mongoose.connection;
-db.on("error", (err) => console.log(`Connection error ${err}`));
-db.once('open', function () {
-  app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
-});
+  const db = mongoose.connection;
+  db.on("error", (err) => console.log(`Connection error ${err}`));
+  db.once("open", function () {
+    app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+  });
 }
 
-main()
+main();
