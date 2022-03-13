@@ -1,15 +1,15 @@
 const Crawler = require("crawler");
 // var interval = setInterval(que(),1800000)
-
+var price ="NOT WORKING";
 const c = new Crawler({
   maxConnections: 10,
   callback: async (error, res, done) => {
     
     if (error) throw error;
     try{
-    console.log(JSON.parse(res.body).stats.floor_price);
+    price = JSON.parse(res.body).stats.floor_price;
     }catch{
-      console.log("No price")
+      price = "No price"
     }
     done();
   },
@@ -25,7 +25,7 @@ function que(project) {
     ]);
 
     return new Promise(resolve => {
-      c.on("drain", resolve("Hello"));
+      c.on("drain", resolve(price));
     })
 
 }
