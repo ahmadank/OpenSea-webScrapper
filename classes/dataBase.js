@@ -1,4 +1,4 @@
-const info = require("./projectInfo");
+const info = require("./scrapper");
 
 function queProject(user){
   user.projects.forEach(project => {
