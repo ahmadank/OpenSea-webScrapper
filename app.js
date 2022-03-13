@@ -1,4 +1,5 @@
 var express = require("express");
+// const session = require('express-session')
 var path = require("path");
 
 var crawlerRouter = require("./routes/crawler");
@@ -10,6 +11,12 @@ app.use(
     extended: true,
   })
 );
+
+app.get('/', function (req, res) {
+  res.render('pages/index', {
+		user: req.session
+	});
+});
 
 app.use(express.static("public"));
 
