@@ -12,8 +12,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 const store = new MongoDBStore({
-	uri: process.env.MONGODB_URI || 'mongodb://localhost/your-app-name',
-	collection: 'sessions'
+	uri: process.env.MONGOLAB_URI
 });
 
 app.use(session({
@@ -41,7 +40,7 @@ app.set("view engine", "pug");
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/webScrapper',
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/webScrapper',
   err => {
       if(err) throw err;
       console.log('connected to MongoDB')
