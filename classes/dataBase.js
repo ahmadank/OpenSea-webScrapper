@@ -1,11 +1,7 @@
-const info = require("./scrapper");
+const info = require("./projectInfo");
 
 async function queProject(user){
-  info.clearSet()
-  user.projects.forEach(async project => {
-    let price = await info.que(project)
-    console.log(price)
-  });
+  console.log(info.getInfo())
 }
 function popProject(name) {
     // let data = fs.readFileSync("./projects.txt", "utf8");
