@@ -1,6 +1,6 @@
 const Crawler = require("crawler");
 // var interval = setInterval(que(),1800000)
-let prices = new Set();
+let prices;
 
 const c = new Crawler({
   maxConnections: 10,
@@ -8,17 +8,15 @@ const c = new Crawler({
     
     if (error) throw error;
     try{
-    console.log(JSON.parse(res))
-    prices.add([JSON.parse(res.body).stats.floor_price])
+    prices = (JSON.parse(res.body).stats.floor_price)
     }catch{
-      prices.add(["Error"])
+      prices.add("Error")
     }
     done();
   },
 });
 
 function que(project) {
-  console.log(project)
     c.queue([
       {
         uri: getLink(project),
