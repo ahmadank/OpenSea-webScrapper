@@ -24,9 +24,7 @@ function que(project) {
       },
     ]);
 
-    return new Promise(resolve => {
-      c.on("drain", resolve(price));
-    })
+    return c.on("drain", price);
 
 }
 
