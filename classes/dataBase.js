@@ -1,4 +1,4 @@
-const crawlerRouter = require("./classes/projectInfo");
+const crawlerRouter = require("./projectInfo");
 
 function queProject(user){
   console.log(user)
