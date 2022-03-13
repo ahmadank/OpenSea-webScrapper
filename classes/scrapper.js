@@ -14,38 +14,16 @@ const c = new Crawler({
     done();
   },
 });
-que();
-function que() {
-  const data = fs.readFileSync("./projects.txt", "utf8");
-  JSON.parse(data).forEach((project) => {
+
+function que(project) {
     c.queue([
       {
         uri: getLink(project),
         jQuery: false,
       },
     ]);
-  });
 }
 
 function getLink(name) {
   return "https://api.opensea.io/collection/" + name + "/stats";
 }
-
-function popProject(name) {
-  let data = fs.readFileSync("./projects.txt", "utf8");
-  data = JSON.parse(data);
-  let index = data.indexOf(name);
-  if (index >= 0) {
-    data.splice(index, 1);
-    fs.writeFileSync("./projects.txt", JSON.stringify(data));
-  }
-}
-
-function changeInterval(x) {
-  clearInterval(interval);
-  setInterval(function () {
-    console.log(x);
-  }, x);
-}
-
-module.exports = router;

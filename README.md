@@ -10,3 +10,7 @@ in on the ethereum network, specifically the openSea marketPlace
 ### `Problems`
 
 - Website owners often time hate web scrapping, for that we were not able to retrieve info such as quantity of items being sold.
+
+### `Ideas`
+
+- The website currently relies on cookies to keep user info stored, for that we need a backup option. Generating an option for the user to enter his secret id will allow the user to restore his projects
