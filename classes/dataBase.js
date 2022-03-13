@@ -1,6 +1,7 @@
 const info = require("./scrapper");
 
 async function queProject(user){
+  info.clearSet
   user.projects.forEach(async project => {
     let price = await info.que(project)
     console.log(price)

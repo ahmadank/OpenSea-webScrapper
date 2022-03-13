@@ -28,13 +28,16 @@ function que(project) {
     return new Promise(resolve => {
       c.on("drain", () => {
         resolve(prices)
-        prices.clear()
       });
     });
 }
 
+function clearSet(){
+  prices.clear()
+}
 function getLink(name) {
   return "https://api.opensea.io/collection/" + name + "/stats";
 }
 
 exports.que = que
+exports.clearSet = clearSet
