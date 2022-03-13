@@ -5,7 +5,6 @@ let prices = new Set();
 const c = new Crawler({
   maxConnections: 10,
   callback: async (error, res, done) => {
-    
     if (error) throw error;
     try{
     let projectNm = res.options.uri.split('/')
@@ -33,6 +32,7 @@ function que(project) {
 }
 
 function clearSet(){
+  c = new Crawler.queue()
   prices.clear()
 }
 function getLink(name) {
