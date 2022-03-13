@@ -5,7 +5,6 @@ async function getInfo(projects){
   info.clearSet()
   await projects.forEach(async project => {
     arr.push(await info.que(project))
-
   });
 }
 function changeInterval(x) {
