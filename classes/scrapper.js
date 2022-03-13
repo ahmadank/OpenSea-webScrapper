@@ -4,10 +4,9 @@ const Crawler = require("crawler");
 const c = new Crawler({
   maxConnections: 10,
   callback: async (error, res, done) => {
-
-    console.log(JSON.parse(res.body))
+    let results = JSON.parse(res.body)
     if (error) throw error;
-    console.log(JSON.parse(res.body).stats.floor_price);
+    console.log(results.stats.floor_price);
     done();
   },
 });
