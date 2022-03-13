@@ -1,7 +1,10 @@
-const crawlerRouter = require("./projectInfo");
+const info = require("./projectInfo");
 
 function queProject(user){
-  console.log(user)
+  user.projects.forEach(project => {
+    let test = info.que(project)
+    console.log(test +" THIS ONE?")
+  });
 }
 function popProject(name) {
     let data = fs.readFileSync("./projects.txt", "utf8");

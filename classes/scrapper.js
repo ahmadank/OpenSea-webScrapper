@@ -1,7 +1,3 @@
-var express = require("express");
-var router = express.Router();
-const fs = require("fs");
-
 const Crawler = require("crawler");
 // var interval = setInterval(que(),1800000)
 
@@ -22,8 +18,15 @@ function que(project) {
         jQuery: false,
       },
     ]);
+
+    return new Promise(resolve => {
+      c.on("drain", () => "Hello");
+    })
+
 }
 
 function getLink(name) {
   return "https://api.opensea.io/collection/" + name + "/stats";
 }
+
+exports.que = que

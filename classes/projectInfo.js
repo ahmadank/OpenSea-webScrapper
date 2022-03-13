@@ -1,3 +1,5 @@
+const info = require("./scrapper");
+
 function changeInterval(x) {
   clearInterval(interval);
   setInterval(function () {
