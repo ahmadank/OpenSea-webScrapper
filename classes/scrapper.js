@@ -4,9 +4,13 @@ const Crawler = require("crawler");
 const c = new Crawler({
   maxConnections: 10,
   callback: async (error, res, done) => {
-    let results = JSON.parse(res.body)
+    
     if (error) throw error;
-    console.log(results.stats.floor_price);
+    try{
+    console.log(JSON.parse(res.body).stats.floor_price);
+    }catch{
+      console.log("No price")
+    }
     done();
   },
 });
@@ -19,6 +23,11 @@ function que(project) {
         jQuery: false,
       },
     ]);
+
+    return new Promise(resolve => {
+      c.on("drain", () => "Hello");
+    })
+
 }
 
 function getLink(name) {
