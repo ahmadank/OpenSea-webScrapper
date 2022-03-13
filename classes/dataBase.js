@@ -3,7 +3,7 @@ const info = require("./scrapper");
 async function queProject(user){
   user.projects.forEach(async project => {
     let price = await info.que(project)
-    console.log(project , price)
+    console.log(price)
   });
 }
 function popProject(name) {
