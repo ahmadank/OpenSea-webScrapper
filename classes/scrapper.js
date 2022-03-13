@@ -8,8 +8,8 @@ const c = new Crawler({
     
     if (error) throw error;
     try{
-    console.log(res.options.uri)
-    prices.add([JSON.parse(res.body).stats.floor_price])
+    let projectNm = res.options.uri.split('/')
+    prices.add([projectNm[projectNm.length - 2 ], JSON.parse(res.body).stats.floor_price])
     }catch{
       prices.add(["Error"])
     }
