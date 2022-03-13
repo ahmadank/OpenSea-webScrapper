@@ -24,9 +24,15 @@ function que(project) {
         jQuery: false,
       },
     ]);
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve(x);
+      }, 2000);
+    });
+    return new Promise(resolve => {
+      c.on("drain", () => resolve(price));
+    });
 }
-
-c.on("drain", () => console.log("LOL"));
 
 function getLink(name) {
   return "https://api.opensea.io/collection/" + name + "/stats";

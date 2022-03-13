@@ -2,7 +2,8 @@ const info = require("./scrapper");
 
 async function queProject(user){
   user.projects.forEach(async project => {
-    info.que(project)
+    let price = await info.que(project)
+    console.log(price)
   });
 }
 function popProject(name) {
