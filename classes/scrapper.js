@@ -8,11 +8,10 @@ const c = new Crawler({
     
     if (error) throw error;
     try{
-    prices.add([res.uri,JSON.parse(res.body).stats.floor_price])
+    prices.add([res.href,JSON.parse(res.body).stats.floor_price])
     }catch{
-      price = "No price"
+      prices.add([res.href,"Error"])
     }
-    console.log(price)
     done();
   },
 });
