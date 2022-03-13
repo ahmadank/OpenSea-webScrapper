@@ -3,6 +3,7 @@ var express = require("express");
 var path = require("path");
 
 var crawlerRouter = require("./routes/crawler");
+const PORT = process.env.PORT || 5000;
 
 var app = express();
 
@@ -25,5 +26,5 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 
-app.listen(3000);
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 console.log("Server is up")
