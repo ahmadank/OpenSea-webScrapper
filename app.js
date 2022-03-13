@@ -13,9 +13,7 @@ app.use(
 );
 
 app.get('/', function (req, res) {
-  res.render('pages/index', {
-		user: req.session
-	});
+  res.render('pages/index')
 });
 
 app.use(express.static("public"));
