@@ -4,7 +4,8 @@ const Crawler = require("crawler");
 const c = new Crawler({
   maxConnections: 10,
   callback: async (error, res, done) => {
-    outgoingLinks = [];
+
+    console.log(JSON.parse(res.body))
     if (error) throw error;
     console.log(JSON.parse(res.body).stats.floor_price);
     done();
@@ -12,6 +13,7 @@ const c = new Crawler({
 });
 
 function que(project) {
+  console.log(project)
     c.queue([
       {
         uri: getLink(project),
