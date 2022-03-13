@@ -9,9 +9,9 @@ const c = new Crawler({
     if (error) throw error;
     try{
       console.log(res)
-    prices.add([JSON.parse(res.body).stats.floor_price])
+    prices.add([res._httpMessage.path, JSON.parse(res.body).stats.floor_price])
     }catch{
-      prices.add(["Error"])
+      prices.add([res._httpMessage.path, "Error"])
     }
     done();
   },
