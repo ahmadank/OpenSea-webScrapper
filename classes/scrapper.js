@@ -20,11 +20,6 @@ function que(project) {
         jQuery: false,
       },
     ]);
-
-    return new Promise(resolve => {
-      c.on("drain", () => "Hello");
-    })
-
 }
 
 function getLink(name) {
