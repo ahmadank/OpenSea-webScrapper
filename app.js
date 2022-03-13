@@ -6,13 +6,15 @@ const path = require("path");
 
 const crawlerRouter = require("./routes/crawler");
 const dataBase = require("./routes/dataBase");
-const PORT = process.env.PORT || 5000;
-// const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 const app = express();
+const uri = process.env.MONGOLAB_URI
+
 
 const store = new MongoDBStore({
-	uri: process.env.MONGODB_URI || 'mongodb://localhost/your-app-name',
+	uri: uri,
 	collection: 'sessions'
 });
 
@@ -41,14 +43,19 @@ app.set("view engine", "pug");
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/webScrapper',
-  err => {
-      if(err) throw err;
-      console.log('connected to MongoDB')
-  });
+async function main(){;
+  try {
+    mongoose.connect( uri, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
+    console.log("connected"));    
+    }catch (error) { 
+    console.log("could not connect");    
+  }  
 
-let db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+const db = mongoose.connection;
+db.on("error", (err) => console.log(`Connection error ${err}`));
 db.once('open', function () {
   app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 });
+}
+
+main()
