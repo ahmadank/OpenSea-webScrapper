@@ -1,6 +1,6 @@
 const info = require("./scrapper");
 
-function queProject(user){
+async function queProject(user){
   user.projects.forEach(project => {
     let test = await info.que(project)
     console.log(test +" THIS ONE?")
