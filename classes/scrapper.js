@@ -10,7 +10,7 @@ const c = new Crawler({
     try{
     prices = (JSON.parse(res.body).stats.floor_price)
     }catch{
-      prices.add("Error")
+      prices = ("Error")
     }
     done();
   },
