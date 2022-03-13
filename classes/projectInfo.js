@@ -3,7 +3,7 @@ const info = require("./scrapper");
 async function getInfo(projects){
   let arr =[];
   info.clearSet()
-  await user.projects.forEach(async project => {
+  await projects.forEach(async project => {
     arr.push(await info.que(project))
 
   });

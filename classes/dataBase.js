@@ -1,7 +1,7 @@
 const info = require("./projectInfo");
 
 async function queProject(user){
-  console.log(info.getInfo())
+  console.log(info.getInfo(user.projects))
 }
 function popProject(name) {
     // let data = fs.readFileSync("./projects.txt", "utf8");
