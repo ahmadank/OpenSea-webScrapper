@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 const uri =
-  process.env.MONGOLAB_URI || "mongodb+srv://ahmadank:R1HyZvOXQzPcDov2@cluster0.v2ao5.mongodb.net/users?retryWrites=true&w=majority";
+  process.env.MONGOLAB_URI;
 
 const store = new MongoDBStore({
   uri: uri,
