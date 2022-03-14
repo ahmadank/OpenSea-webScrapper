@@ -1,18 +1,28 @@
 const info = require("./scrapper");
 
-async function getInfo(projects){
-  let arr =[];
-  info.clearSet()
-  await projects.forEach(async project => {
-    arr.push(await info.que(project))
-  });
+let projects = [];
+var interval = setInterval(() => getInfo(), 1800000);
+
+function setProjects(lsProjects) {
+  console.log(lsProjects);
+  projects = lsProjects;
 }
-function changeInterval(x) {
+
+async function getInfo() {
+  let arr = [];
+  info.clearSet();
+  projects.forEach(async (project) => {
+    arr.push(await info.que(project));
+  });
+
+  return arr;
+}
+
+function changeInterval(someInterval) {
   clearInterval(interval);
-  setInterval(function () {
-    console.log(x);
-  }, x);
+  interval = setInterval(() => getInfo(), someInterval);
 }
 
 exports.getInfo = getInfo;
+exports.setProjects = setProjects;
 exports.changeInterval = changeInterval;

@@ -8,7 +8,8 @@ const dataBase = require("./classes/dataBase");
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-const uri = process.env.MONGOLAB_URI;
+const uri =
+  process.env.MONGOLAB_URI;
 
 const store = new MongoDBStore({
   uri: uri,
@@ -17,7 +18,7 @@ const store = new MongoDBStore({
 
 app.use(
   session({
-    secret: process.env.SESSION_KEY,
+    secret: process.env.SESSION_KEY || "secretMsg",
     store: store,
     resave: false,
     saveUninitialized: false,
@@ -30,10 +31,16 @@ app.use(
   })
 );
 
-app.get("/", function (req, res) {
-  dataBase.queProject(req.session)
-  res.render("pages/index");
-});
+app.use("/", require("./routes/index.js"));
+
+// app.get("/", function (req, res) {
+//   req.session.projects = ["hapePrime"];
+//   dataBase.queProject(req.session);
+//   dataBase.popProject(req.session, "hapePrime");
+//   dataBase.addProject(req.session, "b");
+//   console.log(req.session);
+//   res.render("pages/index");
+// });
 
 app.use(express.static("public"));
 

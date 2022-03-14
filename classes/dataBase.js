@@ -1,17 +1,21 @@
 const info = require("./projectInfo");
 
-async function queProject(user){
-  console.log(await info.getInfo(user.projects))
+async function queProjects(user) {
+  info.setProjects(user.projects);
+  // await info.getInfo(user.projects);
 }
-function popProject(name) {
-    // let data = fs.readFileSync("./projects.txt", "utf8");
-    // data = JSON.parse(data);
-    // let index = data.indexOf(name);
-    // if (index >= 0) {
-    //   data.splice(index, 1);
-    //   fs.writeFileSync("./projects.txt", JSON.stringify(data));
-    // }
-  }
 
-exports.queProject = queProject;
+function popProject(user, project) {
+  const index = user.projects.indexOf(project);
+  if (index > -1) user.projects.splice(index, 1);
+  return user;
+}
+
+function addProject(user, project) {
+  info.changeInterval(1000);
+  return user.projects.push(project);
+}
+
+exports.queProject = queProjects;
 exports.popProject = popProject;
+exports.addProject = addProject;
