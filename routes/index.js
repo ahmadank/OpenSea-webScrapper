@@ -6,7 +6,7 @@ router.get("/", main);
 
 async function main(req, res) {
   if (!req.session.uniqueId) await dataBase.setCustomId(req);
-res.end("<b>hello</b>");
+res.render("pages/index");
 }
 
 

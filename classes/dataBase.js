@@ -15,8 +15,8 @@ function popProject(user, project) {
 }
 
 function addProject(user, project) {
-  info.changeInterval(1000);
-  return user.projects.push(project);
+    if(user.projects.indexOf(project) < 0 )
+      return user.projects.push(project);
 }
 
 async function setCustomId(req) {
@@ -28,6 +28,7 @@ async function setCustomId(req) {
   if (isUnique.length > 0) unique = false;
   if (unique) req.session.uniqueId = passwords.join("-");
   console.log(unique, "Setting" + passwords);
+  req.session.projects=[]
   return req;
 }
 

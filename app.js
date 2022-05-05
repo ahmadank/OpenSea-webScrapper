@@ -32,6 +32,7 @@ app.use(
 );
 
 app.use("/", require("./routes/index.js"));
+app.use("/handler", require("./routes/projectHandler.js"));
 
 // app.get("/", function (req, res) {
 //   req.session.projects = ["hapePrime"];

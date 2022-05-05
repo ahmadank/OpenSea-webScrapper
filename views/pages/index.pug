@@ -1,6 +1,11 @@
-//- Loads the home page
 html
 	head
 		title Home
 	div#main
-		h1 We are not ready yet!
+		h1 Watch List 
+			p Search By Name: 
+			form(action='/handler' method='post')
+				input(type='text' name="addProject")
+				input(type="submit" value="Submit")
+	//- script
+	//- 	include ./client.js
