@@ -12,7 +12,8 @@
     "generate-password": "^1.7.0",
     "mongoose": "^6.2.6",
     "path": "^0.12.7",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "socket.io-client": "^4.5.1"
   },
   "scripts": {
     "start": "node app.js"

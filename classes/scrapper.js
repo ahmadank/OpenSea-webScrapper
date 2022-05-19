@@ -2,7 +2,7 @@ const Crawler = require("crawler");
 let prices = new Set();
 
 const c = new Crawler({
-  maxConnections: 10,
+  maxConnections: 100,
   callback: async (error, res, done) => {
     if (error) throw error;
     try {
@@ -19,7 +19,6 @@ const c = new Crawler({
 });
 
 function que(project) {
-  console.log(project);
   c.queue([
     {
       uri: getLink(project),

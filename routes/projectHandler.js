@@ -7,9 +7,13 @@ router.post("/", eventHandler)
 function eventHandler(req,res){
     if(req.body.addProject){
         dataBase.addProject(req.session, req.body.addProject)
-        res.end()
-        console.log("Added", req.session)
     }
+    if(req.body.removeProject){
+        dataBase.popProject(req.session, req.body.removeProject)
+    }
+
+
+    res.redirect("/")
 }
 
 module.exports = router;

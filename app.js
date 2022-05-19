@@ -9,12 +9,19 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 const uri =
-  process.env.MONGOLAB_URI;
+  process.env.MONGOLAB_URI ||
+  "mongodb+srv://ahmadank:fcjBqaIdtrGMRej0@cluster0.v2ao5.mongodb.net/users?retryWrites=true&w=majority";
 
 const store = new MongoDBStore({
   uri: uri,
   collection: "sessions",
 });
+
+const io = socketIO(app)
+
+io.on("connection", socket =>{
+  console.log(socket.id)
+})
 
 app.use(
   session({
@@ -22,7 +29,7 @@ app.use(
     store: store,
     resave: false,
     saveUninitialized: false,
-  })
+  })1
 );
 
 app.use(
@@ -33,15 +40,6 @@ app.use(
 
 app.use("/", require("./routes/index.js"));
 app.use("/handler", require("./routes/projectHandler.js"));
-
-// app.get("/", function (req, res) {
-//   req.session.projects = ["hapePrime"];
-//   dataBase.queProject(req.session);
-//   dataBase.popProject(req.session, "hapePrime");
-//   dataBase.addProject(req.session, "b");
-//   console.log(req.session);
-//   res.render("pages/index");
-// });
 
 app.use(express.static("public"));
 

@@ -3,9 +3,23 @@ html
 		title Home
 	div#main
 		h1 Watch List 
-			p Search By Name: 
+			p Add a project: 
 			form(action='/handler' method='post')
 				input(type='text' name="addProject")
 				input(type="submit" value="Submit")
-	//- script
-	//- 	include ./client.js
+			p Remove a project:
+			form(action='/handler' method='post')
+				input(type='text' name="removeProject")
+				input(type="submit" value="Submit")
+			div#id
+				p2 pssst here is your secret key, use this to recover your account and projects
+				br
+				br
+				p3 #{secretKey}
+			div#projects
+				p Here are your projects and their respective pricing 
+				for project in projects
+					p Project : #{project[0]} Price : #{project[1]}
+	script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+	script
+		include ./client.js
