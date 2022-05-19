@@ -21,6 +21,11 @@ html
 			div#projects
 				for project in projects
 					p Project : #{project[0]} Price : #{project[1]}
+
+			form()
+				input(type="text" name="newInterval" id="newInterval")
+				input(type="button" value="Submit new Inteval in Minutes" onclick="updateTimeInterval()")
+			h3 Please know that the minumum update interval is 5 minutes
 	script(src="/socket.io/socket.io.js")
 
 	script
