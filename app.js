@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 var server = http.createServer(app);
 const uri =
-  process.env.MONGOLAB_URI
+  process.env.MONGOLAB_URI || "mongodb+srv://ahmadank:fcjBqaIdtrGMRej0@cluster0.v2ao5.mongodb.net/users?retryWrites=true&w=majority";
 
 const store = new MongoDBStore({
   uri: uri,
@@ -67,7 +67,9 @@ async function main() {
 
   const io = require('socket.io')(server)
   io.on("connection", socket => {
+    
     socket.on('getUpdatedInfo', async (cb) => {
+      console.log("called")
       let info = await projectInfo.getInfo()
       console.log(info)
       cb((info) ? Array.from(info) : [])

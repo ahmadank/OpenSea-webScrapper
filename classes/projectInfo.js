@@ -1,7 +1,6 @@
 const info = require("./scrapper");
 
 let projects = [];
-var interval = setInterval(() => getInfo(), 1800000);
 
 function setProjects(lsProjects) {
   projects = lsProjects;
