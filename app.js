@@ -12,7 +12,8 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 var server = http.createServer(app);
 const uri =
-  process.env.MONGOLAB_URI;
+  process.env.MONGOLAB_URI
+
 const store = new MongoDBStore({
   uri: uri,
   collection: "sessions",
