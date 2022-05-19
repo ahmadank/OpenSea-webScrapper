@@ -2,16 +2,17 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const http = require('http')
 const path = require("path");
+
 
 const dataBase = require("./classes/dataBase");
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+var server = http.createServer(app);
 const uri =
-  process.env.MONGOLAB_URI ||
-  "mongodb+srv://ahmadank:fcjBqaIdtrGMRej0@cluster0.v2ao5.mongodb.net/users?retryWrites=true&w=majority";
-
+  process.env.MONGOLAB_URI
 const store = new MongoDBStore({
   uri: uri,
   collection: "sessions",
@@ -56,17 +57,16 @@ async function main() {
   }
 
   const db = mongoose.connection;
-  var server;
   db.on("error", (err) => console.log(`Connection error ${err}`));
   db.once("open", function () {
-    server = app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`Listening on ${PORT}`)
     });
   });
 
   const io = require('socket.io')(server)
   io.on("connection", socket =>{
-  console.log("this is" + socket.id)
+  console.log("this is from socket")
 })
 }
 

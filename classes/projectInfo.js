@@ -10,6 +10,7 @@ function setProjects(lsProjects) {
 async function getInfo() {
   info.clearSet();
   const myPromise = new Promise(async (resolve, reject) => {
+    if (projects.length == 0) resolve()
     projects.forEach(async (project) => {
       resolve(await info.que(project))
     })

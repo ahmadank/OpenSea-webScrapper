@@ -9,8 +9,8 @@ async function main(req, res) {
   if (!req.session.uniqueId) await dataBase.setCustomId(req);
   projectInfo.setProjects(req.session.projects);
   promisePrices = await projectInfo.getInfo();
-  console.log(promisePrices);
-  res.render("pages/index", { projects: Array.from(promisePrices), secretKey: req.session.uniqueId });
+  (promisePrices) ? promisePrices = Array.from(promisePrices) : promisePrices = []
+  res.render("pages/index", { projects: promisePrices, secretKey: req.session.uniqueId });
 }
 
 async function sendData(){
