@@ -29,7 +29,7 @@ app.use(
     store: store,
     resave: false,
     saveUninitialized: false,
-  })1
+  })
 );
 
 app.use(
