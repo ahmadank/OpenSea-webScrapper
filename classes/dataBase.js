@@ -5,18 +5,18 @@ const mongoose = require("mongoose");
 
 async function queProjects(user) {
   info.setProjects(user.projects);
-  // await info.getInfo(user.projects);
-}
+}  
 
 function popProject(user, project) {
   const index = user.projects.indexOf(project);
+  console.log(index)
   if (index > -1) user.projects.splice(index, 1);
   return user;
 }
 
 function addProject(user, project) {
     if(user.projects.indexOf(project) < 0 )
-      return user.projects.push(project);
+      return user.projects.push(project.toLowerCase());
 }
 
 async function setCustomId(req) {

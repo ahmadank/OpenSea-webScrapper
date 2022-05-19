@@ -2,19 +2,22 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const http = require('http')
 const path = require("path");
+
 
 const dataBase = require("./classes/dataBase");
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+var server = http.createServer(app);
 const uri =
-  process.env.MONGOLAB_URI;
-
+  process.env.MONGOLAB_URI
 const store = new MongoDBStore({
   uri: uri,
   collection: "sessions",
 });
+
 
 app.use(
   session({
@@ -33,15 +36,6 @@ app.use(
 
 app.use("/", require("./routes/index.js"));
 app.use("/handler", require("./routes/projectHandler.js"));
-
-// app.get("/", function (req, res) {
-//   req.session.projects = ["hapePrime"];
-//   dataBase.queProject(req.session);
-//   dataBase.popProject(req.session, "hapePrime");
-//   dataBase.addProject(req.session, "b");
-//   console.log(req.session);
-//   res.render("pages/index");
-// });
 
 app.use(express.static("public"));
 
@@ -65,8 +59,15 @@ async function main() {
   const db = mongoose.connection;
   db.on("error", (err) => console.log(`Connection error ${err}`));
   db.once("open", function () {
-    app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+    server.listen(PORT, () => {
+      console.log(`Listening on ${PORT}`)
+    });
   });
+
+  const io = require('socket.io')(server)
+  io.on("connection", socket =>{
+  console.log("this is from socket")
+})
 }
 
 main();

@@ -4,18 +4,18 @@ let projects = [];
 var interval = setInterval(() => getInfo(), 1800000);
 
 function setProjects(lsProjects) {
-  console.log(lsProjects);
   projects = lsProjects;
 }
 
 async function getInfo() {
-  let arr = [];
   info.clearSet();
-  projects.forEach(async (project) => {
-    arr.push(await info.que(project));
-  });
-
-  return arr;
+  const myPromise = new Promise(async (resolve, reject) => {
+    if (projects.length == 0) resolve()
+    projects.forEach(async (project) => {
+      resolve(await info.que(project))
+    })
+  })
+  return myPromise
 }
 
 function changeInterval(someInterval) {
