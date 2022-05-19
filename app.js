@@ -17,11 +17,6 @@ const store = new MongoDBStore({
   collection: "sessions",
 });
 
-const io = socketIO(app)
-
-io.on("connection", socket =>{
-  console.log(socket.id)
-})
 
 app.use(
   session({
@@ -61,10 +56,18 @@ async function main() {
   }
 
   const db = mongoose.connection;
+  var server;
   db.on("error", (err) => console.log(`Connection error ${err}`));
   db.once("open", function () {
-    app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+    server = app.listen(PORT, () => {
+      console.log(`Listening on ${PORT}`)
+    });
   });
+
+  const io = require('socket.io')(server)
+  io.on("connection", socket =>{
+  console.log("this is" + socket.id)
+})
 }
 
 main();
