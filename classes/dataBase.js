@@ -41,6 +41,7 @@ async function recoverData(user, code) {
     await session.remove({})
     return user
   }
+  return false
 }
 exports.queProject = queProjects;
 exports.popProject = popProject;
