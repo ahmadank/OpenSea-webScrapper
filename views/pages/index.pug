@@ -21,5 +21,7 @@ html
 				for project in projects
 					p Project : #{project[0]} Price : #{project[1]}
 	script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+	script(src="/socket.io/socket.io.js")
+
 	script
 		include ./client.js
