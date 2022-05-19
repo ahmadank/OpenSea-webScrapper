@@ -13,8 +13,4 @@ async function main(req, res) {
   res.render("pages/index", { projects: promisePrices, secretKey: req.session.uniqueId });
 }
 
-async function sendData(){
-  promisePrices = await projectInfo.getInfo();
-  console.log(promisePrices);
-}
 module.exports = router;

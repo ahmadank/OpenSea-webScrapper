@@ -16,11 +16,11 @@ html
 				br
 				br
 				p3 #{secretKey}
+			div#projectsDiv
+				p Here are your projects and their respective pricing
 			div#projects
-				p Here are your projects and their respective pricing 
 				for project in projects
 					p Project : #{project[0]} Price : #{project[1]}
-	script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
 	script(src="/socket.io/socket.io.js")
 
 	script

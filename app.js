@@ -6,13 +6,14 @@ const http = require('http')
 const path = require("path");
 
 
-const dataBase = require("./classes/dataBase");
+const projectInfo = require("./classes/projectInfo");
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 var server = http.createServer(app);
 const uri =
   process.env.MONGOLAB_URI
+
 const store = new MongoDBStore({
   uri: uri,
   collection: "sessions",
@@ -65,9 +66,13 @@ async function main() {
   });
 
   const io = require('socket.io')(server)
-  io.on("connection", socket =>{
-  console.log("this is from socket")
-})
+  io.on("connection", socket => {
+    socket.on('getUpdatedInfo', async (cb) => {
+      let info = await projectInfo.getInfo()
+      console.log(info)
+      cb((info) ? Array.from(info) : [])
+    })
+  })
 }
 
 main();
