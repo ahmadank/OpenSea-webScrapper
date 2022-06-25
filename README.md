@@ -16,3 +16,8 @@ in on the ethereum network, specifically the openSea marketPlace
 ### `Ideas`
 
 - The website currently relies on cookies to keep user info stored, for that we need a backup option. Generating an option for the user to enter his secret id will allow the user to restore his projects
+
+
+### `Link`
+
+- The website is hosted currently on Heroku, feel free to use the application by heading over to https://stark-stream-29520.herokuapp.com/
