@@ -12,7 +12,7 @@ function updateInfo(results) {
   var myDiv = document.getElementById("projects");
   myDiv.innerHTML = "Please add a project!"
   results.forEach(result => {
-    myDiv.innerHTML += "<p>Project : " + result[0] + "  Prices : " + result[1] + "<br></p>"
+    myDiv.innerHTML += "<p>Project : " + result[0] + "  Price : <p style=color:gold>" + result[1] + "<br></p></p>"
   })
 }
 

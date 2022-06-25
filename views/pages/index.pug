@@ -1,37 +1,64 @@
 html
+	style
+		include headers/style.css
 	head
 		title Home
-	div#main
-		h1 Watch List 
-			p Add a project: 
-			form(action='/handler' method='post')
-				input(type='text' name="addProject")
-				input(type="submit" value="Submit")
-			p Remove a project:
-			form(action='/handler' method='post')
-				input(type='text' name="removeProject")
-				input(type="submit" value="Submit")
-			div#id
-				p2 pssst here is your secret key, use this to recover your account and projects
-				br
-				br
-				p3 #{secretKey}
-			div#projectsDiv
-				p Here are your projects and their respective pricing
-			div#projects
-				for project in projects
-					p Project : #{project[0]} Price : #{project[1]}
+		body
+		.header
+			.inner-header.flex
+				.projectsBox
+					h1(style="color:black") Watch List 
+						p(style="width: 300px;") Add a project: 
+						form(action='/handler' method='post')
+							input(type='text' name="addProject")
+							input(type="submit" value="Submit")
+						p Remove a project:
+						form(action='/handler' method='post')
+							input(type='text' name="removeProject")
+							input(type="submit" value="Submit")
+				.projectsBox2
+					div#projectsDiv
+						p Here are your projects and their respective pricing
+					div#projects
+						for project in projects
+							p(style="display: inline;") Project : #{project[0]} Price : 
+							p(style="color:gold;display: inline;") #{project[1]}
+							br
+							br
+				.phraseBox
+					.hiddenContainer
+						p2(style="color:black") pssst here is your secret key, use this to recover your account and projects
+						br
+						p2 Hover Here to Reveal Your Secret Phrase
+						br
+						p3(style="color:black;user-select: all;") #{secretKey}
+					.resetBox 
+						text Please insert your secret key to recover your account
+						form(style="padding-top: 10px;" action='/' method='post')
+							input(type='text' name="userCode")
+							input(type="submit" value="Submit")
+					.resetBox 
+						text Data updating too slow? Try increasing the speed by changing the interval
+						form(style="padding-top: 10px;")
+							input(type="text" name="newInterval" id="newInterval")
+							input(type="button" value="Submit new Inteval in Minutes" onclick="updateTimeInterval()")
+						text Please know that the minumum update interval is 5 minutes
 
-			form()
-				input(type="text" name="newInterval" id="newInterval")
-				input(type="button" value="Submit new Inteval in Minutes" onclick="updateTimeInterval()")
-			h3 Please know that the minumum update interval is 5 minutes
+			div
+				svg.waves(xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 24 150 28' preserveaspectratio='none' shape-rendering='auto')
+					defs
+						path#gentle-wave(d='M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z')
+					g.parallax
+						use(xlink:href='#gentle-wave' x='48' y='0' fill='rgba(255,255,255,0.7')
+						use(xlink:href='#gentle-wave' x='48' y='3' fill='rgba(255,255,255,0.5)')
+						use(xlink:href='#gentle-wave' x='48' y='5' fill='rgba(255,255,255,0.3)')
+						use(xlink:href='#gentle-wave' x='48' y='7' fill='#fff')
+		div(style="text-align: center;margin-top: 70px;")
+			p2(style="color: #0000007a;").
+				Please know that the minumum update interval is 5 minutes
+			br
+			a(style="color: #0000007a;text-decoration: none;" href="https://opensea.io/rankings") Please OpenSea to get a project name 
 
-			h2 Please Enter your code secret phrase to recover your account
-			form(action='/' method='post')
-				input(type='text' name="userCode")
-				input(type="submit" value="Submit")
-	script(src="/socket.io/socket.io.js")
-
-	script
-		include ./client.js
+		script(src="/socket.io/socket.io.js")
+		script
+			include ./client.js
